@@ -148,7 +148,7 @@ Earlier homepage screenshots predate the database connection. Connected catalogu
 - Some product photography depicts existing brands and is illustrative. Replace with owned product photography for commercial use.
 - The connected shared project already had security advisor warnings for an existing function's [mutable search path](https://supabase.com/docs/guides/database/database-linter?lint=0011_function_search_path_mutable), an existing [extension in public](https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public), and disabled [leaked-password protection](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection). These global/unrelated settings were preserved.
 - The admin-membership table's no-policy advisor INFO is intentional default-deny; it has no direct client grants and membership is checked through a private, identity-aware helper.
-- Vercel deployment is being configured; the earlier Sites deployment has owner-private access.
+- Vercel production target: https://sneakerdrop-zeta.vercel.app (first deployment verification pending). The earlier Sites deployment has owner-private access.
 - Legal/privacy copy, retention processes and a commercial deletion-request workflow require actual business details.
 
 ## Assets and references
