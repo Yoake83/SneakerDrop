@@ -6,8 +6,8 @@ A premium, responsive sneaker showcase for a fictional independent footwear bran
 
 Connected to real Supabase PostgreSQL and Supabase Auth in the owner's existing **Yoake83's Project**. SneakerDrop uses its own prefixed tables and private functions so it can coexist with the project's existing application. The catalogue reads three seeded sneakers from the database; there are no hardcoded product arrays or mock backend responses.
 
-- Deployment: [Open SneakerDrop](https://sneakerdrop-studio.honeymorel2.chatgpt.site) — owner-private Sites access.
-- Admin: [SneakerDrop Studio](https://sneakerdrop-studio.honeymorel2.chatgpt.site/admin).
+- Production deployment: [Open SneakerDrop](https://sneakerdrop-zeta.vercel.app) — public Vercel deployment.
+- Admin: [SneakerDrop Studio](https://sneakerdrop-zeta.vercel.app/admin).
 - Public GitHub repository: [Yoake83/SneakerDrop](https://github.com/Yoake83/SneakerDrop).
 - Local preview: `http://localhost:5173`.
 
@@ -101,7 +101,7 @@ npm run build
 node --env-file=.env scripts/check-supabase.mjs
 ```
 
-Four unit tests cover email normalization/validation, HTTPS image protocols, price limits and availability values. Production builds pass.
+Four unit tests cover email normalization/validation, HTTPS image protocols, price limits and availability values. Production builds pass. Vercel production was verified with all three database products and a real waitlist submission; the saved test row was removed after verification.
 
 Live HTTP checks verified that three products are publicly readable and anonymous reads of waitlist and admin membership tables are denied. All rollback-only SQL acceptance assertions passed: anonymous/non-admin restrictions, normalized duplicate prevention, admin CRUD, waitlist reads, validation and cascade deletion. The script is saved as `supabase/acceptance.sql`; it references the configured `test@gmail.com` administrator, so adapt that email for another installation. A real browser submission also reached the success state, and submitting the same address with different casing reached the same safe success response.
 
@@ -113,7 +113,7 @@ Browser checks cover desktop/mobile layouts, catalogue navigation, filters, prod
 
 `.openai/hosting.json` identifies the existing Site and `dist` output. Source is committed and pushed through the Sites workflow, then the exact production build is packaged and published. The current static build embeds only public Supabase settings. Runtime environment variables alone cannot change a previously built Vite bundle; configure build variables and rebuild.
 
-The Site currently has owner-private access. A public submission needs public audience access or a public Vercel/Netlify deployment.
+The public submission uses https://sneakerdrop-zeta.vercel.app. The earlier Sites deployment retains its owner-private access.
 
 ### Vercel / public GitHub submission
 
@@ -147,7 +147,7 @@ Earlier homepage screenshots predate the database connection. Connected catalogu
 - Some product photography depicts existing brands and is illustrative. Replace with owned product photography for commercial use.
 - The connected shared project already had security advisor warnings for an existing function's [mutable search path](https://supabase.com/docs/guides/database/database-linter?lint=0011_function_search_path_mutable), an existing [extension in public](https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public), and disabled [leaked-password protection](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection). These global/unrelated settings were preserved.
 - The admin-membership table's no-policy advisor INFO is intentional default-deny; it has no direct client grants and membership is checked through a private, identity-aware helper.
-- Vercel production target: https://sneakerdrop-zeta.vercel.app (first deployment verification pending). The earlier Sites deployment has owner-private access.
+- Vercel production deployment is live. The earlier Sites deployment remains available separately.
 - Legal/privacy copy, retention processes and a commercial deletion-request workflow require actual business details.
 
 ## Assets and references
@@ -158,3 +158,14 @@ Earlier homepage screenshots predate the database connection. Connected catalogu
 - The original motion shoe was created with the built-in image-generation tool; asset and exact prompt are documented in `docs/motion-art-direction.md`.
 - Design reference: [Icebug on Landbook](https://land-book.com/websites/98076-vercel-security-checkpoint). Original SneakerDrop composition and copy.
 - Backend references: [RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [functions](https://supabase.com/docs/guides/database/functions), [API keys](https://supabase.com/docs/guides/api/api-keys).
+
+## Verified Vercel production
+
+Public site: https://sneakerdrop-zeta.vercel.app
+
+Verified production catalogue reads, a real waitlist submission and persistence, and the protected admin sign-in route. The test submission was removed after verification.
+
+![Vercel production catalogue](docs/vercel-production.png)
+
+![Vercel admin sign-in](docs/vercel-admin-login.png)
+
